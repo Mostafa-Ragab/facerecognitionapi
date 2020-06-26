@@ -2,7 +2,16 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors')
-
+const knex = require('knex');
+knex({
+    client: 'pg',
+    connection: {
+      host : '127.0.0.1',
+      user : 'your_database_user',
+      password : 'your_database_password',
+      database : 'myapp_test'
+    }
+  });
 
 const app =express();
 
@@ -14,7 +23,7 @@ const database = {
         {
             id: '123',
             name:'john',
-            email:'johnn@gmail.com',
+            email:'john@gmail.com',
             password: 'cook',
             entries: 0,
             joined: new Date()
