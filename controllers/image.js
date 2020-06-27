@@ -1,4 +1,4 @@
-const handlerImage = (req, res) => {
+const handlerImage = (req, res, db) => {
     const { id } = req.body;
     db('users').where('id','=', id)
     .increment('entries', 1)
