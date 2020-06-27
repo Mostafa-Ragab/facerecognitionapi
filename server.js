@@ -68,7 +68,7 @@ app.post('/register', (req, res)=>{
             return trx('users')
                 .returning('*')
                 .insert({
-                    email: loginEmail,
+                    email: loginEmail[0],
                     name: name,
                     joined: new Date()
                 })
@@ -76,6 +76,8 @@ app.post('/register', (req, res)=>{
                     res.json(user[0]);
                 })    
         })
+        .then(trx.commit)
+        .catch(trx.rollback)
     })
     .catch(err => res.status(400).json('unable to change'))
 })
