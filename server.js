@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const cors = require('cors')
+const bcrypt = require('bcrypt-nodejs');
+const cors = require('cors');
 const knex = require('knex');
 
 const db = knex({
@@ -55,6 +56,7 @@ app.post('/signin', (req, res) => {
 })
 app.post('/register', (req, res)=>{
     const { email, name, password } = req.body;
+    const hash = bcrypt.hashSync(password);
     db('users')
     .returning('*')
     .insert({
