@@ -47,12 +47,11 @@ app.get('/', (req, res)=>{
     res.send(database.users);
 })
 app.post('/signin', (req, res) => {
-    if(req.body.email === database.users[0].email &&
-        req.body.password === database.users[0].password) {
-            res.json(database.users[0]);
-        } else {
-            res.status(400).json('error logging in');
-        }
+    db.select('email', 'hash').from('login')
+    .where('email','='  , req.body.email)
+    .then(data => {
+        
+    })
 })
 app.post('/register', (req, res)=>{
     const { email, name, password } = req.body;
