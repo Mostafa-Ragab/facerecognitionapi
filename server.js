@@ -22,26 +22,6 @@ const app = express();
 app.use(cors());
 app.use(bodyparser.json());
 
-const database = {
-    users: [
-        {
-            id: '123',
-            name:'john',
-            email:'john@gmail.com',
-            password: '123',
-            entries: 0,
-            joined: new Date()
-        },
-        {
-            id: '124',
-            name:'sally',
-            email:'sally@gmail.com',
-            password: 'bannas',
-            entries: 0,
-            joined: new Date()
-        },
-    ]
-}
 
 app.get('/', (req, res)=>{
     res.send(database.users);
@@ -52,14 +32,16 @@ app.post('/signin', (req, res) => {
     .then(data => {
         const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
         if(isValid) {
-            db.select('*').from('users')
+            return db.select('*').from('users')
             .where('email', '=' , req.body.email)
             .then(user => {
                 res.json(user[0])
             })
             .catch(err => res.status(400).json('unable to get user'))
-
+        } else {
+          res.status(400).json('wrong credintials')  
         }
+        
     })
     .catch(err => res.status(400).json('wrong credintials'))
 })
