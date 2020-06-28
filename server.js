@@ -17,25 +17,20 @@ const db = knex({
       database : 'smartbrain'
     }
   });
-db.select('*').from('users').then(data => {
-    console.log(data);
-})
-
 const app = express();
 
 app.use(cors());
 app.use(bodyparser.json());
 
-
 app.get('/', (req, res)=>{
     res.send(database.users);
 })
+
 app.post('/signin', ( req, res) => {signin.handleSignin( req, res, db, bcrypt) })
 app.post('/register', ( req, res) => { register.handleRegister( req, res, db, bcrypt) })
-
 app.get('/profile/:id', ( req, res ) => {profile.handleProfile( req, req, db ) })
-
 app.put('/image', ( req, res ) => {image.handlerImage( req, res, db)})
+
 app.listen(3000 , ()=>{
     console.log('app is running on part 3000')
 })
