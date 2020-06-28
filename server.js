@@ -17,11 +17,10 @@ const db = knex({
       database : 'smartbrain'
     }
   });
-const app = express();
 
+const app = express();
 app.use(cors());
 app.use(bodyparser.json());
-
 app.get('/', (req, res)=>{
     res.send(database.users);
 })
