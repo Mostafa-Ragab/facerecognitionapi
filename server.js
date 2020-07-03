@@ -7,6 +7,7 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
+const clarifai = require('clarifai')
 
 const db = knex({
     client: 'pg',
