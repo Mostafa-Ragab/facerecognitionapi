@@ -7,7 +7,6 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
-const clarifai = require('clarifai')
 
 const db = knex({
     client: 'pg',
@@ -30,6 +29,7 @@ app.post('/signin', ( req, res) => {signin.handleSignin( req, res, db, bcrypt) }
 app.post('/register', ( req, res) => { register.handleRegister( req, res, db, bcrypt) })
 app.get('/profile/:id', ( req, res ) => {profile.handleProfile( req, req, db ) })
 app.put('/image', ( req, res ) => {image.handlerImage( req, res, db)})
+app.post('/imageurl', (req, res) =>{image.handleApiCall(req, res)})
 
 app.listen(3000 , ()=>{
     console.log('app is running on part 3000')
