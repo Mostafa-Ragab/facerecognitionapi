@@ -9,7 +9,7 @@ const app = new Clarifai.App({
        .then(data => {
            res.json(data);
        })
-       .catch(err => res.status(400).json('unable to work with API'))     
+       .catch(err => res.status(400).json(' to work with API'))     
    }
 
 const handlerImage = (req, res, db) => {
