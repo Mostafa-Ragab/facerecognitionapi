@@ -22,7 +22,7 @@ const app = express();
 app.use(cors());
 app.use(bodyparser.json());
 app.get('/', (req, res) => {
-    res.send('it is working');
+    res.send('it is working!');
 })
 
 app.post('/signin', ( req, res) => {signin.handleSignin( req, res, db, bcrypt) })
@@ -31,6 +31,6 @@ app.get('/profile/:id', ( req, res ) => {profile.handleProfile( req, req, db ) }
 app.put('/image', ( req, res ) => {image.handlerImage( req, res, db)})
 app.post('/imageurl', (req, res) =>{image.handleApiCall(req, res)})
 
-app.listen(process.env.port || 3000 , ()=> {
-    console.log(`app is running on part ${process.env.port}`)
+app.listen(process.env.PORT || 3000 , ()=> {
+    console.log(`app is running on part ${process.env.PORT}`)
 })
